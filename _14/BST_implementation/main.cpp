@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 #include "BinarySearchTree.h"
 
 using namespace std;
@@ -6,6 +8,18 @@ using namespace std;
 int main()
 {
     BinarySearchTree<int> bst;
+    BinarySearchTree<int> printBST;
+
+    srand(time(0));
+
+    cout << "Inserting 20 random numbers:\n";
+    for (int i = 0; i < 20; i++)
+        printBST.insert(rand() % 100 + 1);
+
+    printBST.print();
+
+    cout << "--------------------------------------\n";
+
 
     cout << "Inserting values: 10, 5, 15, 3, 7, 12, 18" << endl;
     bst.insert(10);
@@ -44,7 +58,10 @@ int main()
     bst.remove(10);
     cout << "Number of items after removing 10: " << bst.size() << endl;
     bst.print();
-    
+
+    cout << "Press Enter to exit\n";
+    cin.ignore();
+    //cin.get();
 
     return 0;
 }

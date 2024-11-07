@@ -11,41 +11,56 @@ template<class T>
 struct Node
 {
     T data;
-    Node* left;
-    Node* right;
+    Node *left;
+    Node *right;
 
-    explicit Node(T val) : data(val), left(nullptr), right(nullptr) {}
-
+    explicit Node(T val) : data(val), left(nullptr), right(nullptr)
+    {
+    }
 };
 
-template<class T> class BinarySearchTree {
-
+template<class T>
+class BinarySearchTree
+{
 private:
-    Node<T>* root;
+    Node<T> *root;
     int numOfNodes;
 
     // Helper functions for recursive operations
-    Node<T>* insert(Node<T>* node, T value);
-    Node<T>* search(Node<T>* node, T value) const;
-    Node<T>* remove(Node<T>* node, T value);
-    Node<T>* findMin(Node<T>* node) const;
-    Node<T>* findMax(Node<T>* node) const;
-    void print(Node<T>* node, int spaces) const;
+    Node<T> *insert(Node<T> *node, T value);
+
+    Node<T> *search(Node<T> *node, T value) const;
+
+    Node<T> *remove(Node<T> *node, T value);
+
+    Node<T> *findMin(Node<T> *node) const;
+
+    Node<T> *findMax(Node<T> *node) const;
+
+    void print(Node<T> *node, int spaces) const;
 
 public:
-    BinarySearchTree() : root(nullptr), numOfNodes(0) {}
+    BinarySearchTree() : root(nullptr), numOfNodes(0)
+    {
+    }
 
     void insert(T val);
-    Node<T>* search(T val) const;
+
+    Node<T> *search(T val) const;
+
     void remove(T val);
+
     T findMin() const;
+
     T findMax() const;
+
     int size() const;
+
     void print() const;
 };
 
 template<class T>
-Node<T> * BinarySearchTree<T>::insert(Node<T> *node, T value)
+Node<T> *BinarySearchTree<T>::insert(Node<T> *node, T value)
 {
     if (node == nullptr)
         return new Node<T>(value);
@@ -59,7 +74,7 @@ Node<T> * BinarySearchTree<T>::insert(Node<T> *node, T value)
 }
 
 template<class T>
-Node<T>* BinarySearchTree<T>::search(Node<T> *node, T value) const
+Node<T> *BinarySearchTree<T>::search(Node<T> *node, T value) const
 {
     if (node == nullptr)
         return nullptr;
@@ -72,7 +87,7 @@ Node<T>* BinarySearchTree<T>::search(Node<T> *node, T value) const
 }
 
 template<class T>
-Node<T>* BinarySearchTree<T>::remove(Node<T> *node, T value)
+Node<T> *BinarySearchTree<T>::remove(Node<T> *node, T value)
 {
     if (node == nullptr)
         return nullptr;
@@ -84,29 +99,25 @@ Node<T>* BinarySearchTree<T>::remove(Node<T> *node, T value)
     {
         if (node->left == nullptr)
         {
-            Node<T>* temp = node->right;
+            Node<T> *temp = node->right;
             delete node;
             return temp;
-        }
-        else if (node->right == nullptr)
+        } else if (node->right == nullptr)
         {
-            Node<T>* temp = node->left;
+            Node<T> *temp = node->left;
             delete node;
             return temp;
         }
 
-        else
-        {
-            Node<T>* min = findMin(node->right);
-            node->data = min->data;
-            node->right = remove(node->right, min->data);
-        }
+        Node<T> *min = findMin(node->right);
+        node->data = min->data;
+        node->right = remove(node->right, min->data);
     }
     return node;
 }
 
 template<class T>
-Node<T> * BinarySearchTree<T>::findMin(Node<T> *node) const
+Node<T> *BinarySearchTree<T>::findMin(Node<T> *node) const
 {
     if (node == nullptr)
         return nullptr;
@@ -117,7 +128,7 @@ Node<T> * BinarySearchTree<T>::findMin(Node<T> *node) const
 }
 
 template<class T>
-Node<T> * BinarySearchTree<T>::findMax(Node<T> *node) const
+Node<T> *BinarySearchTree<T>::findMax(Node<T> *node) const
 {
     if (node == nullptr)
         return nullptr;
@@ -154,7 +165,7 @@ void BinarySearchTree<T>::insert(T val)
 }
 
 template<class T>
-Node<T>* BinarySearchTree<T>::search(T val) const
+Node<T> *BinarySearchTree<T>::search(T val) const
 {
     return search(this->root, val);
 }
@@ -187,7 +198,7 @@ int BinarySearchTree<T>::size() const
 template<class T>
 void BinarySearchTree<T>::print() const
 {
-    print(root,0);
+    print(root, 0);
 }
 
 
